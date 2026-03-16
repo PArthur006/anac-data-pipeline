@@ -41,7 +41,7 @@ def executar_transformacao():
         .appName("ANAC_Transform_Bronze_to_Silver") \
         .master("local[*]") \
         .config("spark.driver.memory", "4g") \
-        .config("spark.sql.parquet.compreession.codec", "snappy") \
+        .config("spark.sql.parquet.compression.codec", "snappy") \
         .getOrCreate()
     
     # Reduz a verbosidade dos logs internos do Spark no Terminal
