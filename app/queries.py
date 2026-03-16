@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Carrega variáveis de ambiente
 load_dotenv()
@@ -10,14 +11,23 @@ load_dotenv()
 # Inicializa a conexão com o bacno de forma otimizada (apenas uma vez).
 @st.cache_resource
 def get_database_connection():
-    user = os.getenv("DB_USER")
-    password = os.getenv("DB_PASSWORD")
     host = os.getenv("DB_HOST")
-    port = os.getenv("DB_PORT")
-    db = os.getenv("DB_NAME")
-
-    conexao = f"postgresql://{user}:{password}@{host}:{port}/{db}"
-
+    
+    if host:
+        # ROTA 1: Infraestrutura Completa (PostgreSQL)
+        st.sidebar.success("Conectado ao PostgreSQL (Produção/Local)")
+        user = os.getenv("DB_USER")
+        password = os.getenv("DB_PASSWORD")
+        port = os.getenv("DB_PORT")
+        db = os.getenv("DB_NAME")
+        conexao = f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}"
+    else:
+        # ROTA 2: Fallback (SQLite Local)
+        st.sidebar.warning("Conectado ao SQLite (Modo Fallback)")
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        sqlite_path = BASE_DIR / "data" / "anac_gold.db"
+        conexao = f"sqlite:///{sqlite_path}"
+        
     return create_engine(conexao)
 
 # Função de extração com Cache: Evita bater no banco de dados a cada interação do usuário.
