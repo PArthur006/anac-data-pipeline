@@ -1,5 +1,19 @@
+# Ambientes Virtuais e Cache
 venv/
-.env
 __pycache__/
-data/
+.pytest_cache/
+
+# Variáveis de Ambiente (Segurança)
+.env
+
+# Dados Brutos e Intermediários
+data/bronze/*
+!data/bronze/.gitkeep
+data/silver/*
+!data/silver/.gitkeep
+
+# Checkpoints do Jupyter Notebook
 notebooks/.ipynb_checkpoints
+
+# Exceção para o banco de dados final, que é necessário para o dashboard
+!data/anac_gold.db
