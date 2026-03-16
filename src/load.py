@@ -75,7 +75,10 @@ def modelar_e_carregar_dados():
     logger.info("Modelando Tabela Fato: Voos Mensais...")
     colunas_fato = [
         'ano', 'mes', 'empresa_sigla', 'aeroporto_de_origem_sigla', 'aeroporto_de_destino_sigla',
-        'natureza', 'correio_kg', 'ask', 'rpk', 'atk', 'rtk', 'combustivel_litros', 'distancia_voada_km', 'decolagens', 'carga_paga_km', 'carga_gratis_km', 'correio_km', 'assentos', 'payload', 'horas_voadas', 'bagagem_kg'
+        'natureza', 'grupo_de_voo', 'passageiros_pagos', 'passageiros_gratis', 'carga_paga_kg',
+        'carga_gratis_kg', 'correio_kg', 'ask', 'rpk', 'atk', 'rtk', 'combustivel_litros',
+        'distancia_voada_km', 'decolagens', 'carga_paga_km', 'carga_gratis_km', 'correio_km',
+        'assentos', 'payload', 'horas_voadas', 'bagagem_kg'
     ]
     fato_voo = df_silver[colunas_fato].copy()
 
