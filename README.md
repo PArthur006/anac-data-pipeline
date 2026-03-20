@@ -119,3 +119,35 @@ streamlit run app/dashboard.py
 
 - Com `.env` válido, o dashboard usa PostgreSQL.
 - Sem `.env` (ou sem infraestrutura), o dashboard usa SQLite local (`data/anac_gold.db`).
+
+## Estrutura de Pastas e Arquivos
+
+Abaixo está a disposição das pastas e arquivos do projeto, organizada para refletir as diferentes etapas do pipeline de dados:
+
+```
+anac-data-pipeline/
+├── README.md                # Documentação do projeto
+├── requirements.txt         # Dependências do projeto
+├── app/                     # Aplicação de visualização (Streamlit)
+│   ├── dashboard.py         # Dashboard interativo
+│   ├── queries.py           # Consultas SQL para visualização
+├── data/                    # Dados utilizados no pipeline
+│   ├── bronze/              # Dados brutos extraídos
+│   │   └── dados_estatisticos.csv
+│   └── silver/              # Dados processados e particionados
+│       └── vra_condolidado/
+│           ├── _SUCCESS
+│           ├── ano=2000/
+│           ├── ano=2001/
+│           └── ...
+├── notebooks/               # Notebooks Jupyter para exploração de dados
+│   └── 01_exploracao_bronze.ipynb
+├── src/                     # Scripts principais do pipeline
+│   ├── export_sqlite.py     # Exportação de dados para SQLite
+│   ├── extract.py           # Extração de dados
+│   ├── load.py              # Carregamento de dados
+│   ├── transform.py         # Transformação de dados
+│   └── utils.py             # Funções utilitárias
+```
+
+Essa estrutura foi projetada para separar claramente as responsabilidades de cada componente do pipeline, facilitando a manutenção e escalabilidade.
