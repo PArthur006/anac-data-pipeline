@@ -5,10 +5,9 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 from pathlib import Path
 
-# Carrega variáveis de ambiente
 load_dotenv()
 
-# Inicializa a conexão com o bacno de forma otimizada (apenas uma vez).
+# Inicializa a conexão com o banco de forma otimizada.
 @st.cache_resource
 def get_database_connection():
     host = os.getenv("DB_HOST")
