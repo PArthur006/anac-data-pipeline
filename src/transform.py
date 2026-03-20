@@ -82,7 +82,6 @@ def executar_transformacao():
         logger.error(f"Falha crítica na transformação: {erro}")
         raise
     finally:
-        # Ação obrigatória: Liberar a memória RAM derrubando a sessão.
         spark.stop()
 
 if __name__ == "__main__":
